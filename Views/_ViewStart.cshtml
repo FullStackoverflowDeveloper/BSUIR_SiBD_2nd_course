@@ -1,0 +1,12 @@
+﻿@{
+    if (User.IsInRole("Admin"))
+    {
+        Layout = "_AdminLayout";
+    }else if (User.IsInRole("User"))
+    {
+        Layout = "_Layout";
+    }else
+    {
+        Layout = "_GuestLayout";
+    }
+}

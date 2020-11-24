@@ -1,0 +1,60 @@
+﻿@model DrivingSchool.Context.AppDbContext;
+@{
+    ViewData["Title"] = "Cars";
+}
+
+
+<h4 class="text-black text-center">CARS</h4>
+<br />
+<br />
+
+@*Директива, используемая в обработке нажатых кнопок ввнутри фигурных скобок*@
+@using (Html.BeginForm("MethodSwitcher", "Car", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row align-items-center" align="center">
+            <div class="col">
+                <input type="submit" value="Create" class="btn btn-sm btn-success" name="button" />
+            </div>
+            <div class="col">
+                <input type="submit" value="Delete" class="btn btn-sm btn-warning" name="button" />
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="container">
+        <table class="table table-sm table-bordered">
+            <tr>
+                <th>
+                    <div class="form-check">
+                        <input type="checkbox" id="checkAll" class="cb-element" />
+                    </div>
+                </th>
+                <th>Номер</th>
+                <th>Марка</th>
+                <th>Цвет</th>
+                <th>Действие</th>
+            </tr>
+            @foreach (Car car in Model.Cars.ToList())
+            {
+                <tr>
+                    <td>
+                        <div class="form-check">
+                            <input type="checkbox" name="IDs" value="@car.ID" class="cb-element" />
+                        </div>
+                    </td>
+                    <td>@Html.Raw(car.LicensePlate)</td>
+                    <td>@Html.Raw(car.Brand)</td>
+                    <td>@Html.Raw(car.Color)</td>
+                    <td><input type="submit" class="btn btn-sm btn-primary" value="Update" asp-action="Update" asp-controller="Car" asp-route-ID="@car.ID" /></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+}
+
+<script src="~/js/jquery/jquery.js"></script>
+<script src="~/js/Checkbox.js"></script>

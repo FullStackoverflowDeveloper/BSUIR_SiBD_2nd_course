@@ -1,0 +1,36 @@
+﻿@model DrivingSchool.Context.AppDbContext;
+@{
+    ViewData["Title"] = "Cars";
+}
+
+@*Форма, для ввода данных*@
+<div class="container">
+    <h3>Add car</h3>
+    <div class="form-group">
+        <label>Номер авто</label>
+        <input type="text" id="LicensePlate" class="form-control" placeholder="Номер авто" />
+    </div>
+    <div class="form-group">
+        <label>Марка</label>
+        <input type="text" id="Brand" class="form-control" placeholder="Марка" />
+    </div>
+    <div class="form-group">
+        <label>Цвет</label>
+        <input type="text" id="Color" class="form-control" placeholder="Цвет" />
+    </div>
+    <div class="form-group">
+        <label>Инструктор</label>
+        <select id="InstructorID" class="form-control" placeholder="Инструктор">
+            @foreach (var item in Model.Instructors.ToList())
+            {
+                <option value="@item.ID">@item.FName @item.MName @item.LName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-outline-success" id="dataSend">Add car</button>
+    </div>
+</div>
+
+<script src="~/js/jquery/jquery.js"></script>
+<script src="~/Views/Car/CreateCar.js"></script>

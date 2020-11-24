@@ -1,0 +1,18 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "Роли";
+}
+
+<h4 class="text-black text-center">Create role</h4>
+@*Вывод ошибок, при наличии таковых*@
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@*Форма для отправки данных на метод контроллера*@
+<form asp-action="Create" asp-controller="Role" method="post">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input name="name" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

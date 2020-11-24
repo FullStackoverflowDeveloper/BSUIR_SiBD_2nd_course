@@ -1,0 +1,67 @@
+﻿@model DrivingSchool.MethodModels.StudentAction;
+@{
+    ViewData["Title"] = "Students";
+}
+
+
+<h4 class="text-black text-center">STUDENTS</h4>
+<br />
+<br />
+
+@using (Html.BeginForm("MethodSwitcher", "Student", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row align-items-center" align="center">
+            <div class="col">
+                <input type="submit" value="Create" class="btn btn-sm btn-success" name="button" />
+            </div>
+            <div class="col">
+                <input type="submit" value="Delete" class="btn btn-sm btn-warning" name="button" />
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="container">
+        <table class="table table-sm table-bordered">
+            <tr>
+                <th>
+                    <div class="form-check">
+                        <input type="checkbox" id="checkAll" class="cb-element" />
+                    </div>
+                </th>
+                <th>Паспорт</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Фамилия</th>
+                <th>Адрес</th>
+                <th>Номер группы</th>
+                <th>Действие</th>
+            </tr>
+            @foreach (Student student in Model.db.Students.ToList())
+            {
+                int fd = Int32.Parse(student.GroupNumb);
+                Group gr = Model.db.Groups.Find(fd);
+                <tr>
+                    <td>
+                        <div class="form-check">
+                            <input type="checkbox" name="IDs" value="@student.ID" class="cb-element" />
+                        </div>
+                    </td>
+                    <td>@Html.Raw(@student.Passport)</td>
+                    <td>@Html.Raw(@student.FName)</td>
+                    <td>@Html.Raw(@student.MName)</td>
+                    <td>@Html.Raw(@student.LName)</td>
+                    <td>@Html.Raw(@student.Address)</td>
+                    <td>@Html.Raw(gr.Title)</td>
+                    <td><input type="submit" class="btn btn-sm btn-primary" value="Update" asp-action="Update" asp-controller="Student" asp-route-ID="@student.ID" /></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+}
+
+<script src="~/js/jquery/jquery.js"></script>
+<script src="~/js/Checkbox.js"></script>

@@ -1,0 +1,33 @@
+﻿@model DrivingSchool.ViewModels.RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="container">
+    <h3>Регистрация</h3>
+
+    <form method="post" asp-action="Register" asp-controller="Entrance">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label><br />
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label><br />
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label><br />
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PasswordConfirm"></label><br />
+            <input asp-for="PasswordConfirm" class="form-control" />
+            <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-outline-secondary" value="Apply"/>
+    </form>
+</div>

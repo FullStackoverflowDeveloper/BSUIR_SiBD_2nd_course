@@ -1,0 +1,53 @@
+﻿@model DrivingSchool.MethodModels.ExamAction
+@{
+    ViewData["Title"] = "Exams";
+
+    Exam exam = Model.db.Exams.Find(Model.ID);
+}
+
+<div class="container">
+    <h3>Update exam</h3>
+    <div class="form-group">
+        <label>День экзамена</label>
+        <input type="date" id="DateExam" class="form-control" placeholder="День экзамена" asp-for="@exam.DateExam" />
+    </div>
+    <div class="form-group">
+        <label>Студент</label>
+        <select id="StudentID" class="form-control" asp-for="@exam.StudentID">
+            @foreach (Student item in Model.db.Students.ToList())
+            {
+                <option value="@item.ID">@item.FName @item.MName @item.LName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Автомобиль</label>
+        <select id="CarID" class="form-control" asp-for="@exam.CarID">
+            @foreach (var item in Model.db.Cars.ToList())
+            {
+                <option value="@item.ID">@item.LicensePlate | @item.Brand</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Инструктор</label>
+        <select id="InstructorID" class="form-control" asp-for="@exam.InstructorID">
+            @foreach (var item in Model.db.Instructors.ToList())
+            {
+                <option value="@item.ID">@item.FName @item.MName @item.LName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Отдел ГИБДД</label>
+        <input type="text" id="TraffPoliceDep" class="form-control" placeholder="Отдел ГИБДД" asp-for="@exam.TraffPoliceDep" />
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-outline-success" id="dataSend">Update info</button>
+    </div>
+</div>
+
+<input type="hidden" id="ID" value="@Model.ID" />
+
+<script src="~/js/jquery/jquery.js"></script>
+<script src="~/Views/Exam/UpdateExam.js"></script>

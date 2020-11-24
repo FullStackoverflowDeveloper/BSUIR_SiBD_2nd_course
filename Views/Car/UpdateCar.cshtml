@@ -1,0 +1,41 @@
+﻿@model DrivingSchool.MethodModels.CarAction
+@{
+    ViewData["Title"] = "Cars";
+
+    Car car = Model.db.Cars.Find(Model.ID);
+}
+
+@*Форма, для ввода данных*@
+<div class="container">
+    <h3>Update car</h3>
+
+    <div class="form-group">
+        <label>Номер авто</label>
+        <input class="form-control" placeholder="Номер авто" asp-for="@car.LicensePlate" id="LicensePlate" />
+    </div>
+    <div class="form-group">
+        <label>Марка</label>
+        <input class="form-control" placeholder="Марка" asp-for="@car.Brand" id="Brand" />
+    </div>
+    <div class="form-group">
+        <label>Цвет</label>
+        <input class="form-control" placeholder="Цвет" asp-for="@car.Color" id="Color" />
+    </div>
+    <div class="form-group">
+        <label>Инструктор</label>
+        <select id="InstructorID" class="form-control" asp-for="@car.InstructorID">
+            @foreach (var item in Model.db.Instructors.ToList())
+            {
+                <option value="@item.ID">@item.FName @item.MName @item.LName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-outline-success" id="dataSend">Update info</button>
+    </div>
+</div>
+
+<input type="hidden" id="ID" value="@Model.ID" />
+
+<script src="~/js/jquery/jquery.js"></script>
+<script src="~/Views/Car/UpdateCar.js"></script>

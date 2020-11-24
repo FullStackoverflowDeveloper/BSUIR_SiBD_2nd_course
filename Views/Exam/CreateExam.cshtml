@@ -1,0 +1,49 @@
+﻿@model DrivingSchool.Context.AppDbContext;
+@{
+    ViewData["Title"] = "Exams";
+}
+
+<div class="container">
+    <h3>Add exam</h3>
+    <div class="form-group">
+        <label>День экзамена</label>
+        <input type="date" id="DateExam" class="form-control" placeholder="День экзамена" />
+    </div>
+    <div class="form-group">
+        <label>Студент</label>
+        <select id="StudentID" class="form-control">
+            @foreach (Student item in Model.Students.ToList())
+            {
+                <option value="@item.ID">@item.FName @item.MName @item.LName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Автомобиль</label>
+        <select id="CarID" class="form-control">
+            @foreach (var item in Model.Cars.ToList())
+            {
+                <option value="@item.ID">@item.LicensePlate | @item.Brand</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Инструктор</label>
+        <select id="InstructorID" class="form-control">
+            @foreach (var item in Model.Instructors.ToList())
+            {
+                <option value="@item.ID">@item.FName @item.MName @item.LName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Отдел ГИБДД</label>
+        <input type="text" id="TraffPoliceDep" class="form-control" placeholder="Отдел ГИБДД" />
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-outline-success" id="dataSend">Add exam</button>
+    </div>
+</div>
+
+<script src="~/js/jquery/jquery.js"></script>
+<script src="~/Views/Exam/CreateExam.js"></script>
